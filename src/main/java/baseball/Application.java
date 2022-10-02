@@ -7,7 +7,7 @@ public class Application {
     public static void main(String[] args) {
         try {
             Game game = new Game();
-            game.play();
+            game.run();
         } catch (IllegalArgumentException e) {
             View.errorMessage(e.getMessage());
             System.exit(0);

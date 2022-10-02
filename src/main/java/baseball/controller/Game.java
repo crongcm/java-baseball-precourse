@@ -16,21 +16,23 @@ public class Game {
     public static final int BALL_MAX_NUMBER = 9;
     public static final int BALL_INPUT_SIZE = 3;
 
-    public Game() {
-        this.computer = new Computer();
-        this.player = new Player();
+    public void run() {
+        do {
+            this.computer = new Computer();
+            this.player = new Player();
+            play();
+        } while (GameState.isPlayGame(View.inputRestart()));
+
     }
 
     public void play() {
-        this.gameState = GameState.PLAY;
+        gameState = GameState.PLAY;
 
         do {
             this.player.inputBalls(View.inputPlayer());
             this.umpire = new Umpire(computer.balls(), player.balls());
             this.gameState = umpire.judge();
-            View.resultMessage(umpire.result());
+            View.resultMessage(umpire.result(), gameState);
         } while (gameState == GameState.DEFEAT);
-
-        View.victoryMessage();
     }
 }
