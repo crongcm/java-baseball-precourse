@@ -3,10 +3,9 @@ package baseball.controller;
 import baseball.model.Computer;
 import baseball.model.GameState;
 import baseball.model.Player;
-import camp.nextstep.edu.missionutils.Console;
+import baseball.view.View;
 
 public class Game {
-    public static final String PLAYER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
     private GameState gameState;
     private Computer computer;
     private Player player;
@@ -24,8 +23,7 @@ public class Game {
         this.gameState = GameState.PLAY;
         System.out.println("computer = " + computer.balls());
 
-        System.out.println(PLAYER_INPUT_MESSAGE);
-        player.inputBalls(Console.readLine());
+        player.inputBalls(View.inputPlayer());
         System.out.println("player = " + player.balls());
     }
 }

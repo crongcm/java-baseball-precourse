@@ -1,6 +1,7 @@
 package baseball;
 
 import baseball.controller.Game;
+import baseball.view.View;
 
 public class Application {
     public static void main(String[] args) {
@@ -8,7 +9,7 @@ public class Application {
             Game game = new Game();
             game.play();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            View.errorMessage(e.getMessage());
             System.exit(0);
         }
     }
