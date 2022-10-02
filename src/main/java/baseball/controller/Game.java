@@ -24,9 +24,13 @@ public class Game {
     public void play() {
         this.gameState = GameState.PLAY;
 
-        this.player.inputBalls(View.inputPlayer());
-        this.umpire = new Umpire(computer.balls(), player.balls());
-        this.gameState = umpire.judge();
-        View.printResult(umpire.result());
+        do {
+            this.player.inputBalls(View.inputPlayer());
+            this.umpire = new Umpire(computer.balls(), player.balls());
+            this.gameState = umpire.judge();
+            View.resultMessage(umpire.result());
+        } while (gameState == GameState.DEFEAT);
+
+        View.victoryMessage();
     }
 }

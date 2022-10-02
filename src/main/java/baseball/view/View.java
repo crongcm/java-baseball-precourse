@@ -18,7 +18,11 @@ public class View {
         System.out.println(message);
     }
 
-    public static void printResult(String result) {
+    public static void resultMessage(String result) {
         System.out.println(result);
+    }
+
+    public static void victoryMessage() {
+        System.out.println(VICTORY_MESSAGE);
     }
 }
