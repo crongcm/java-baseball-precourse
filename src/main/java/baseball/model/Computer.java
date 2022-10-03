@@ -8,27 +8,35 @@ import java.util.List;
 public class Computer {
     private List<Integer> balls;
 
-    public Computer() {
-        generateBalls();
-    }
-
     public List<Integer> balls() {
         return balls;
     }
 
-    private void generateBalls() {
+    public void generateBalls() {
         this.balls = new ArrayList<>();
 
-        while (this.balls.size() < Game.BALL_INPUT_SIZE) {
+        while (isLessThanInputSize()) {
             addNewBall(this.balls);
         }
     }
 
-    private static void addNewBall(List<Integer> balls) {
-        int ball = Randoms.pickNumberInRange(Game.BALL_MIN_NUMBER, Game.BALL_MAX_NUMBER);
+    private boolean isLessThanInputSize() {
+        return this.balls.size() < Game.BALL_INPUT_SIZE;
+    }
 
-        if (!balls.contains(ball)) {
-            balls.add(ball);
+    private static void addNewBall(List<Integer> balls) {
+        int newBall = generateNewBall();
+
+        if (isDuplicateBalls(balls, newBall)) {
+            balls.add(newBall);
         }
+    }
+
+    private static int generateNewBall() {
+        return Randoms.pickNumberInRange(Game.BALL_MIN_NUMBER, Game.BALL_MAX_NUMBER);
+    }
+
+    private static boolean isDuplicateBalls(List<Integer> balls, int ball) {
+        return !balls.contains(ball);
     }
 }

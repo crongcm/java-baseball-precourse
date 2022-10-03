@@ -13,4 +13,8 @@ public enum GameState {
     public static boolean isPlayGame(GameState gameState) {
         return gameState.equals(PLAY);
     }
+
+    public static boolean isDefeatGame(GameState gameState) {
+        return gameState.equals(DEFEAT);
+    }
 }

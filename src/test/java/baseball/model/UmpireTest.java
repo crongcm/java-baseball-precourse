@@ -25,7 +25,8 @@ class UmpireTest {
         List<Integer> playerBalls = Arrays.asList(2, 7, 6);
 
         // when
-        Umpire umpire = new Umpire(computerBalls, playerBalls);
+        Umpire umpire = new Umpire();
+        umpire.initGame(computerBalls, playerBalls);
         GameState gameState = umpire.judge();
 
         // then
@@ -42,7 +43,8 @@ class UmpireTest {
         List<Integer> playerBalls = Arrays.asList(5, 1, 3);
 
         // when
-        Umpire umpire = new Umpire(computerBalls, playerBalls);
+        Umpire umpire = new Umpire();
+        umpire.initGame(computerBalls, playerBalls);
         GameState gameState = umpire.judge();
 
         // then
@@ -59,7 +61,8 @@ class UmpireTest {
         player.inputBalls(input);
 
         // when
-        Umpire umpire = new Umpire(computerBalls, player.balls());
+        Umpire umpire = new Umpire();
+        umpire.initGame(computerBalls, player.balls());
         umpire.judge();
 
         // then
@@ -75,7 +78,8 @@ class UmpireTest {
         player.inputBalls(input);
 
         // when
-        Umpire umpire = new Umpire(computerBalls, player.balls());
+        Umpire umpire = new Umpire();
+        umpire.initGame(computerBalls, player.balls());
         umpire.judge();
 
         // then
@@ -91,11 +95,14 @@ class UmpireTest {
         List<Integer> playerBalls01 = Arrays.asList(5, 2, 4); // 1스트라이크
 
         // when
-        Umpire umpire = new Umpire(computerBalls, playerBalls21);
+        Umpire umpire = new Umpire();
+        Umpire umpire2 = new Umpire();
+        Umpire umpire3 = new Umpire();
+        umpire.initGame(computerBalls, playerBalls21);
+        umpire2.initGame(computerBalls, playerBalls20);
+        umpire3.initGame(computerBalls, playerBalls01);
         umpire.judge();
-        Umpire umpire2 = new Umpire(computerBalls, playerBalls20);
         umpire2.judge();
-        Umpire umpire3 = new Umpire(computerBalls, playerBalls01);
         umpire3.judge();
 
         // then

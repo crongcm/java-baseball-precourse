@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class Umpire {
+    public static final String STRIKE_FORMAT = "%d스트라이크";
+    public static final String BALL_FORMAT = "%d볼";
+    public static final String NOTHING_FORMAT = "낫싱";
+
     private int strikeCount;
     private int ballCount;
     private List<Integer> computerBalls;
     private List<Integer> playerBalls;
 
-    public static final String STRIKE_FORMAT = "%d스트라이크";
-    public static final String BALL_FORMAT = "%d볼";
-    public static final String NOTHING_FORMAT = "낫싱";
-
-    public Umpire(List<Integer> computerBalls, List<Integer> playerBalls) {
+    public void initGame(List<Integer> computerBalls, List<Integer> playerBalls) {
         this.strikeCount = 0;
         this.ballCount = 0;
         this.computerBalls = computerBalls;
@@ -66,18 +66,34 @@ public class Umpire {
     }
 
     public String result() {
-        if (getStrikeCount() == 0 && getBallCount() == 0) {
+        if (isNothing()) {
             return NOTHING_FORMAT;
         }
 
-        if (getBallCount() == 0) {
-            return String.format(STRIKE_FORMAT, getStrikeCount());
+        if (isNotBall()) {
+            return getResultMessage(STRIKE_FORMAT, getStrikeCount());
         }
 
-        if (getStrikeCount() == 0) {
-            return String.format(BALL_FORMAT, getBallCount());
+        if (isNotStrike()) {
+            return getResultMessage(BALL_FORMAT, getBallCount());
         }
 
-        return String.format(BALL_FORMAT, getBallCount()) + " " + String.format(STRIKE_FORMAT, getStrikeCount());
+        return getResultMessage(BALL_FORMAT, getBallCount()) + " " + getResultMessage(STRIKE_FORMAT, getStrikeCount());
+    }
+
+    private boolean isNothing() {
+        return isNotStrike() && isNotBall();
+    }
+
+    private boolean isNotBall() {
+        return getBallCount() == 0;
+    }
+
+    private boolean isNotStrike() {
+        return getStrikeCount() == 0;
+    }
+
+    private String getResultMessage(String messageFormat, int ballCount) {
+        return String.format(messageFormat, ballCount);
     }
 }

@@ -4,11 +4,11 @@ import baseball.model.GameState;
 import camp.nextstep.edu.missionutils.Console;
 
 public class View {
-    public static final String PLAYER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
-    public static final String VICTORY_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
-    public static final String RESTART_GAME_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
-    public static final String FLAG_RESTART_GAME = "1";
-    public static final String FLAG_END_GAME = "2";
+    private static final String PLAYER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
+    private static final String VICTORY_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    private static final String RESTART_GAME_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+    private static final String FLAG_RESTART_GAME = "1";
+    private static final String FLAG_END_GAME = "2";
 
     private View() {}
 
@@ -21,15 +21,14 @@ public class View {
         System.out.println(message);
     }
 
-    public static void resultMessage(String result, GameState gameState) {
+    public static void resultMessage(String result) {
         System.out.println(result);
-        if (GameState.isVictoryGame(gameState)) {
-            victoryMessage();
-        }
     }
 
-    public static void victoryMessage() {
-        System.out.println(VICTORY_MESSAGE);
+    public static void victoryMessageBy(GameState gameState) {
+        if (GameState.isVictoryGame(gameState)) {
+            System.out.println(VICTORY_MESSAGE);
+        }
     }
 
     public static GameState inputRestart() {
@@ -38,12 +37,12 @@ public class View {
         do {
             System.out.println(RESTART_GAME_MESSAGE);
             inputRestart = Console.readLine();
-        } while (isNotOneOrTwo(inputRestart));
+        } while (isNotGameFlag(inputRestart));
 
         return FLAG_END_GAME.equals(inputRestart) ? GameState.END : GameState.PLAY;
     }
 
-    private static boolean isNotOneOrTwo(String inputRestart) {
+    private static boolean isNotGameFlag(String inputRestart) {
         return !(inputRestart.equals(FLAG_RESTART_GAME) || inputRestart.equals(FLAG_END_GAME));
     }
 }

@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Player {
-    private static final String INPUT_BALL_REGEX = "[1-9]{3}";
+    public static final String INPUT_BALL_REGEX = "[1-9]{3}";
 
     private List<Integer> balls;
 
